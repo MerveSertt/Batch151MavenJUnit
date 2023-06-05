@@ -1,4 +1,4 @@
-package techproed.day06_Maven;
+package techproed.day07_MavenJUnit;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -7,12 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.security.Key;
 import java.time.Duration;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
-public class C02_ClassWork {
+public class C01_ClassWork {
     /*
     1.http://zero.webappsecurity.com sayfasina gidin
 2.Signin buttonuna tiklayin
@@ -41,8 +40,12 @@ public class C02_ClassWork {
         signButton.click();
 
         //3.Login alanine “username” yazdirin
-        WebElement loginButton = driver.findElement(By.xpath("//input[@id='user_login']"));
+        WebElement loginButton = driver.findElement(By.xpath("//input[@id='user_login']")); //CSS ile almak istersek: input#user_login
         loginButton.sendKeys("username");
+        //2.Way
+       //   WebElement login = driver.findElement(By.xpath("//input[@id='user_login']"));
+       //   login.sendKeys("username",Keys.TAB,"password",Keys.ENTER);
+
 
         //4.Password alanine “password” yazdirin
         WebElement passwordButton = driver.findElement(with(By.tagName("input")).below(loginButton));
@@ -53,6 +56,10 @@ public class C02_ClassWork {
         //6.Online Banking altında Pay Bills sayfasina gidin
         WebElement onlineBanking = driver.findElement(By.xpath("//li[@id='onlineBankingMenu']"));
         onlineBanking.click();
+
+        //text ile almak isersek: (//*[text()=.]) [11] bütün textlerden 11.sini kullanmış olduk
+        //Bu şekilde text ile aldığımız bir xpath'de text değişse bile biz o webelementi handle edebiliriz. Metin şeklinde girilseydi
+        // dev tarafından değiştirildiğinde locate doğru ulaşamazdı. Böyle index ile alındığında değişiklik olsa dahi locate'e ulaşılabilir.
 
         WebElement payBills = driver.findElement(By.xpath("//span[@id='pay_bills_link']"));
         payBills.click();
@@ -65,6 +72,8 @@ public class C02_ClassWork {
 
         //9.Pay buttonuna tiklayin
         driver.findElement(By.xpath("//input[@value='Pay']")).click();
+        //2.Yol
+        driver.findElement(By.cssSelector("#sp_amount")).sendKeys("500", Keys.TAB,"2020-09-10", Keys.TAB,Keys.TAB,Keys.ENTER);
 
         //10.“The payment was successfully submitted.” mesajinin ciktigini control edin
         WebElement successfully = driver.findElement(By.xpath("//div[@id='alert_content']"));
@@ -76,6 +85,13 @@ public class C02_ClassWork {
         }else {
             System.out.println("Test Failed");
         }
+        //2.Yol: Webelementin görünür olup olmadığını doğrulamak için yaptık
+        if (successfully.isDisplayed()){
+            System.out.println("Test Passed");
+        }else {
+            System.out.println("Test Failed");
+        }
+
         driver.close();
 
 
