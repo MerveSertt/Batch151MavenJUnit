@@ -70,6 +70,7 @@ public class C03_Dropdown {
         bekle(2);
 
     }
+    //************* PRATİK KULLANILABİLECEK METHODLAR ******************
 
     @After
     public void tearDown() throws Exception {
