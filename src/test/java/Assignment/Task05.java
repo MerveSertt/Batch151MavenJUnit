@@ -6,6 +6,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import techproed.utilities.TestBase;
 
+import java.util.List;
+
 public class Task05 extends TestBase {
     @Test
     public void test01() {
@@ -13,13 +15,16 @@ public class Task05 extends TestBase {
         driver.get("https://www.jqueryscript.net/demo/Easy-iFrame-based-Twitter-Emoji-Picker-Plugin-jQuery-Emoojis/");
 
         // ikinci emojiye tıklayın
-        WebElement frame = driver.findElement(By.xpath("//iframe"));
-        driver.switchTo().frame(frame);
+        WebElement iframe = driver.findElement(By.xpath("//*[@id='emoojis']"));
+        driver.switchTo().frame(iframe);
         driver.findElement(By.xpath("(//span[@class='mdl-tabs__ripple-container mdl-js-ripple-effect'])[2]")).click();
 
         // İkinci emoji öğelerini yazdırınız
-        WebElement emoji = driver.findElement(By.xpath("//div[@id='nature']"));
-        System.out.println(emoji.getText());
+        List<WebElement> emojiler = driver.findElements(By.xpath("//div[@id='nature']"));
+        for (WebElement w:emojiler) {
+            System.out.println(w.getText());
+        }
+
 
         // Parent iframe e geri donun
         driver.switchTo().parentFrame();
