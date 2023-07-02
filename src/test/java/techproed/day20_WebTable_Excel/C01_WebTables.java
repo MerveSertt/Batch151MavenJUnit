@@ -87,12 +87,31 @@ public class C01_WebTables extends TestBase {
         return satirSutun.getText();
     }
 
-         //ÖDEV
-         //C03_WebTables class'ı için aldığımız rapora gidelim
-         //NOT:driver.get("testOutput/extentReports/extentReport_09_53_35_26062023.html")
-         //Başlığın Extent Report olduğunu test edelim
-         //Rapor temasını dark yapalım
-         //Dashboard bölümüne gidip tabloyu yazdırınız
-         //Tester'ın "isminiz" olduğunu doğrulayalım
-         //Sayfayı kapatalım
+    @Test
+    public void test02() {
+        //ÖDEV
+        //C03_WebTables class'ı için aldığımız rapora gidelim
+        driver.get("C://Users//merve//IdeaProjects//Batch151MavenJUnit//testOutput/extentReports/extentReport_04_12_02072023.html");
+        //Başlığın Extent Report olduğunu test edelim
+        String expectedTitle = "Extent Report";
+        String actualTitle = driver.getTitle();
+        Assert.assertEquals(expectedTitle,actualTitle);
+
+        //Rapor temasını dark yapalım
+        driver.findElement(By.xpath("(//i[@class='material-icons'])[1]")).click();
+
+        //Dashboard bölümüne gidip tabloyu yazdırınız
+        driver.findElement(By.xpath("//a[@id='enable-dashboard']"));
+        driver.findElement(By.xpath("(//tbody)[3]")).getText();
+
+        //Tester'ın "isminiz" olduğunu doğrulayalım
+        String actualName = driver.findElement(By.xpath("(//table)[3]//tr[3]//td[2]")).getText();
+        String expectedName = "Erol";
+        Assert.assertEquals(actualName,expectedName);
+
+        //Sayfayı kapatalım
+
+    }
+
+
 }
